@@ -4,7 +4,7 @@ from flask import Flask, jsonify, json, render_template, request, url_for, redir
 from werkzeug.exceptions import abort
 from datetime import datetime
 import logging
-
+import sys
 
 
 # Count all database connections
@@ -34,7 +34,7 @@ def log_message(message, code = 0):
      if 0: normal log
         1: error log  
     '''
-    time=datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
     if code == 0:
         app.logger.info('{time} | {message}'.format(time=time, message=message))
     else:
@@ -58,11 +58,11 @@ def index():
 def post(post_id):
     post = get_post(post_id)
     if post is None:
-      log_message('Article id no. "{id}" doesn\'t exist!'.format(id=post_id), 1)
+      log_message('Article id no. "{id}" doesn\'t exist!'.format(id = post_id), 1)
       return render_template('404.html'), 404
     else:
-      title=post['title']
-      log_message('Article "{title}" retrieved!'.format(title=title))
+      title = post['title']
+      log_message('Article "{title}" retrieved!'.format(title = title))
       return render_template('post.html', post=post)
 
 # Define the About Us page
@@ -86,7 +86,7 @@ def create():
                          (title, content))
             connection.commit()
             connection.close()
-            log_message('A new article, with title: "{title}" created!'.format(title=title))
+            log_message('A new article, with title: "{title}" created!'.format(title = title))
 
             return redirect(url_for('index'))
 
@@ -96,10 +96,10 @@ def create():
 @app.route('/healthz')
 def healthz():
     response = app.response_class(
-        response=json.dumps(
+        response = json.dumps(
             {"result":"OK - healthy"}),
-            status=200,
-            mimetype='application/json'
+            status = 200,
+            mimetype = 'application/json'
     )
 
     return response
@@ -114,13 +114,17 @@ def metrics():
     response = app.response_class(
         response = json.dumps(
             {"db_connection_count": db_connection_count, "post_count": post_count}),
-            status=200,
-            mimetype='application/json'
+            status = 200,
+            mimetype = 'application/json'
     )
 
     return response
 
 # start the application on port 3111
 if __name__ == "__main__":
-   logging.basicConfig(filename='app.log',level=logging.DEBUG)
+   fh = logging.FileHandler('app.log')
+   soh = logging.StreamHandler(sys.stdout)
+   seh = logging.StreamHandler(sys.stderr)
+   handlers = [seh, soh, fh]
+   logging.basicConfig(handlers=handlers, level=logging.DEBUG)
    app.run(host='0.0.0.0', port='3111')
