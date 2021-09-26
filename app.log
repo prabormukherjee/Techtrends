@@ -6,3 +6,9 @@ INFO:app:09/26/2021, 10:01:22 | About US page retrived
 INFO:werkzeug:127.0.0.1 - - [26/Sep/2021 10:01:22] "GET /about HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [26/Sep/2021 10:01:26] "GET /create HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [26/Sep/2021 10:01:28] "GET / HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:3111/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [26/Sep/2021 10:35:02] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [26/Sep/2021 11:15:06] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [26/Sep/2021 11:15:06] "GET /static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [26/Sep/2021 11:18:59] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [26/Sep/2021 11:20:57] "GET / HTTP/1.1" 200 -
